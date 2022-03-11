@@ -1,42 +1,47 @@
 from django.http import HttpResponse
 from django.template import loader
 
+from places.models import Place
+
 
 def index(request):
     template = loader.get_template('index.html')
 
-    places = {
-        "type": "FeatureCollection",
-        "features": [
+    features = []
+    places = Place.objects.all()
+
+    for item in places:
+        features.append(
             {
                 "type": "Feature",
                 "geometry": {
                     "type": "Point",
-                    "coordinates": [37.62, 55.793676]
+                    "coordinates": [item.coordinate_lng, item.coordinate_lat]
                 },
                 "properties": {
-                    "title": "«Легенды Москвы",
-                    "placeId": "moscow_legends",
-                    "detailsUrl": "/static/places/moscow_legends.json"
-                }
-            },
-            {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [37.64, 55.753676]
-                },
-                "properties": {
-                    "title": "Крыши24.рф",
-                    "placeId": "roofs24",
-                    "detailsUrl": "/static/places/roofs24.json"
+                    "title": item.title,
+                    "placeId": item.id,
+                    "detailsUrl": {
+                        "title": item.title,
+                        "imgs": [],
+                        "description_short": item.description_short,
+                        "description_long": item.description_long,
+                        "coordinates": {
+                            "lng": item.coordinate_lng,
+                            "lat": item.coordinate_lat
+                        }
+                    }
                 }
             }
-        ]
+        )
+
+    places_as_json = {
+        "type": "FeatureCollection",
+        "features": features
     }
 
     context = {
-        "places": places
+        "places": places_as_json
     }
 
     rendered_page = template.render(context, request)
