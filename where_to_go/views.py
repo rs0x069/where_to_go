@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.template import loader
+from slugify import slugify
 
 from places.models import Place
 
@@ -20,7 +21,7 @@ def index(request):
                 },
                 "properties": {
                     "title": item.title,
-                    "placeId": item.id,
+                    "placeId": "{0}-{1}".format(slugify(item.title, max_length=16), item.id),
                     "detailsUrl": {
                         "title": item.title,
                         "imgs": [],
