@@ -1,8 +1,10 @@
 from django.http import HttpResponse
 from django.template import loader
+from django.urls import reverse
 from slugify import slugify
 
 from places.models import Place
+from places.views import get_place
 
 
 def index(request):
@@ -22,16 +24,7 @@ def index(request):
                 "properties": {
                     "title": item.title,
                     "placeId": "{0}-{1}".format(slugify(item.title, max_length=16), item.id),
-                    "detailsUrl": {
-                        "title": item.title,
-                        "imgs": [],
-                        "description_short": item.description_short,
-                        "description_long": item.description_long,
-                        "coordinates": {
-                            "lng": item.coordinate_lng,
-                            "lat": item.coordinate_lat
-                        }
-                    }
+                    "detailsUrl": reverse(get_place, args=(item.id,))
                 }
             }
         )
