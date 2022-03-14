@@ -8,7 +8,6 @@ from .models import Place, PlaceImage
 class PlaceImageInline(SortableInlineAdminMixin, admin.TabularInline):
     model = PlaceImage
     fields = ('image', 'preview_image')
-    # ordering = ('order',)
     extra = 0
     readonly_fields = ('preview_image',)
 
@@ -22,3 +21,4 @@ class PlaceAdmin(admin.ModelAdmin):
     inlines = [
         PlaceImageInline,
     ]
+
