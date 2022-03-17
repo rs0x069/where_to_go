@@ -61,5 +61,33 @@ python manage.py runserver
 * Панель управления доступна по адресу <http://127.0.0.1:8000/admin/>
 * Сайт необходимо заполнить тестовыми данными по адресу <http://127.0.0.1:8000/admin/places/place/>
 
+## Настройка проекта
+### Переменные окружения
+* DJANGO_SECRET_KEY - переменная SECRET_KEY в settings.py
+* DJANGO_DEBUG - переменная DEBUG в settings.py
+* DJANGO_ALLOWED_HOSTS - переменная ALLOWED_HOSTS в settings.py, несколько хостов указываются через запятую
+### Загрузка данными
+```commandline
+python manage.py load_place http://адрес/файла.json
+```
+
+## Образец json-файла
+```json
+{
+    "title": "Горбовская ГЭС",
+    "imgs": [
+        "https://raw.githubusercontent.com/devmanorg/where-to-go-places/master/media/151dc8d2833276130c3dff6dd1e43aac.jpg",
+        "https://raw.githubusercontent.com/devmanorg/where-to-go-places/master/media/1ba047f0e1e885f4aff5ee18d54e87bc.jpg",
+        "https://raw.githubusercontent.com/devmanorg/where-to-go-places/master/media/4af219237df1691ffe0d4ba41a2f5b41.jpg"
+    ],
+    "description_short": "В 80 километрах от Москвы стоит Горбовская ГЭС — заброшенная ...",
+    "description_long": "<p>Горбовская ГЭС была сооружена в 1953 году. Она была достаточно мощной, на её борту установили два 250-киловатных генератора, а также ...</p>",
+    "coordinates": {
+        "lng": "36.26108899999998",
+        "lat": "55.65323799999996"
+    }
+}
+```
+
 ***
 Тестовые данные взяты с сайта [KudaGo](https://kudago.com).
