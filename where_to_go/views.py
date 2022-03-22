@@ -13,18 +13,18 @@ def index(request):
     features = []
     places = Place.objects.all()
 
-    for item in places:
+    for place in places:
         features.append(
             {
                 "type": "Feature",
                 "geometry": {
                     "type": "Point",
-                    "coordinates": [item.coordinate_lng, item.coordinate_lat]
+                    "coordinates": [place.coordinate_lng, place.coordinate_lat]
                 },
                 "properties": {
-                    "title": item.title,
-                    "placeId": "{0}-{1}".format(slugify(item.title, max_length=16), item.id),
-                    "detailsUrl": reverse(get_place, args=(item.id,))
+                    "title": place.title,
+                    "placeId": "{0}-{1}".format(slugify(place.title, max_length=16), place.id),
+                    "detailsUrl": reverse(get_place, args=(place.id,))
                 }
             }
         )
