@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 
-from places.models import Place, PlaceImage
+from places.models import Place
 
 
 def get_place(request, place_id):
@@ -9,7 +9,7 @@ def get_place(request, place_id):
 
     place_details = {
         "title": place.title,
-        "imgs": [item.get_absolute_image_url for item in PlaceImage.objects.filter(place=place)],
+        "imgs": [image.get_absolute_image_url for image in place.images.all()],
         "description_short": place.description_short,
         "description_long": place.description_long,
         "coordinates": {
