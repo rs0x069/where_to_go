@@ -1,8 +1,9 @@
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls.static import static
-from . import settings
-from . import views
+
+from where_to_go import settings
+from where_to_go import views
 
 urlpatterns = [
     path('', views.index),
