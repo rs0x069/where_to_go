@@ -20,7 +20,7 @@ class Place(models.Model):
 
 
 class PlaceImage(models.Model):
-    place = models.ForeignKey(Place, on_delete=models.CASCADE, verbose_name='Место')
+    place = models.ForeignKey(Place, on_delete=models.CASCADE, related_name='images', verbose_name='Место')
     image = models.ImageField(upload_to='images/', verbose_name='Изображение')
     is_active = models.BooleanField(default=True, verbose_name='Активно')
     order = models.PositiveSmallIntegerField(default=0, verbose_name="Сортировка")
@@ -30,7 +30,6 @@ class PlaceImage(models.Model):
 
     @property
     def get_absolute_image_url(self):
-        # return "{0}{1}".format(settings.MEDIA_URL, self.image.url)
         return "{0}".format(self.image.url)
 
     class Meta:
