@@ -132,9 +132,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# TINYMCE_DEFAULT_CONFIG = {
-#     'height': "320px",
-#     'width': "960px",
-# }
-# TINYMCE_SPELLCHECKER = True
