@@ -13,7 +13,7 @@ class PlaceImageInline(SortableInlineAdminMixin, admin.TabularInline):
 
     def preview_image(self, instance):
         return format_html('<img src="{}" height={} />', instance.image.url, '200px')
-    preview_image.short_description = "Предосмотр"
+    preview_image.short_description = "Предпросмотр"
 
 
 @admin.register(Place)
