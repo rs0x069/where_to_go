@@ -1,7 +1,6 @@
 from django.http import HttpResponse
 from django.template import loader
 from django.urls import reverse
-
 from slugify import slugify
 
 from places.models import Place
