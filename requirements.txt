@@ -1,7 +1,8 @@
 Django==3.2.12
-Pillow==8.4.0
-python-slugify==6.1.1
 django-admin-sortable2==1.0.4
 django-tinymce==3.4.0
-python-dotenv
+environs==9.5.0
+Pillow==8.4.0
+python-dotenv==0.20.0
+python-slugify==6.1.1
 requests==2.27.1
