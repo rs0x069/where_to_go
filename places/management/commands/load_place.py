@@ -22,7 +22,7 @@ class Command(BaseCommand):
 
         place_content = response.json()
 
-        place_created, is_place_created = Place.objects.get_or_create(
+        place, is_new_place = Place.objects.get_or_create(
             title=place_content['title'],
             defaults={
                 'description_short': place_content['description_short'],
@@ -32,9 +32,9 @@ class Command(BaseCommand):
             }
         )
 
-        if not is_place_created:
-            print("Place doesn't created. The place '%s' is exists" % place_created)
-            return False
+        if not is_new_place:
+            print(f"Place doesn't created. The place {place} is exists")
+            return
 
         images_url = place_content['imgs']
         for image_url in images_url:
@@ -43,6 +43,6 @@ class Command(BaseCommand):
             image_response = requests.get(image_url)
             image_response.raise_for_status()
 
-            place_image = PlaceImage(place=place_created)
+            place_image = PlaceImage(place=place)
             place_image.image.save(image_filename, ContentFile(image_response.content), save=False)
             place_image.save()
