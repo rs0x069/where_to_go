@@ -1,5 +1,4 @@
-from django.http import HttpResponse
-from django.template import loader
+from django.shortcuts import render
 from django.urls import reverse
 from slugify import slugify
 
@@ -8,8 +7,6 @@ from places.views import get_place
 
 
 def index(request):
-    template = loader.get_template('index.html')
-
     features = []
     places = Place.objects.all()
 
@@ -29,14 +26,13 @@ def index(request):
             }
         )
 
-    places_as_json = {
+    places_geojson = {
         "type": "FeatureCollection",
         "features": features
     }
 
     context = {
-        "places": places_as_json
+        "places": places_geojson
     }
 
-    rendered_page = template.render(context, request)
-    return HttpResponse(rendered_page)
+    return render(request, 'index.html', context)
